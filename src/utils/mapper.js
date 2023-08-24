@@ -1,5 +1,5 @@
-exports.albumDBToModel = ({ album_id, name, year }) => {
-  return { id: album_id, name, year }
+exports.albumDBToModel = ({ album_id, name, year, cover }) => {
+  return { id: album_id, name, year, coverUrl: cover }
 }
 
 exports.songsDBToModel = ({ song_id, title, performer }) => {

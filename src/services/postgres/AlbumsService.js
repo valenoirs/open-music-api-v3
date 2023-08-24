@@ -66,6 +66,21 @@ class AlbumsService {
       throw new NotFoundError('Failed to delete album, album not found')
     }
   }
+
+  async updateAlbumCoverById(coverUrl, id) {
+    await this.readAlbumById(id)
+
+    const query = {
+      text: 'UPDATE albums SET cover = $1 WHERE album_id = $2 RETURNING album_id',
+      values: [coverUrl, id],
+    }
+
+    const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new InvariantError('Failed to update album cover')
+    }
+  }
 }
 
 module.exports = AlbumsService
